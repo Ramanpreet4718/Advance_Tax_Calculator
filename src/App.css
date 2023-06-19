@@ -1,0 +1,9 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #3b9ac6;
+  color: white;
+  font-family: sans-serif;
+}
