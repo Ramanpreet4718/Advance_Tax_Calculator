@@ -1,6 +1,15 @@
+import { useContext } from "react";
 import constants from "../utils/constants";
+import { HouseProperty } from "./HouseProperty";
+import { OhterSources } from "./OtherSources";
+import { MainContext } from "../context/MainContextProvider";
 
 export default function Calculator() {
+  let { formData, setFormData, setData } = useContext(MainContext);
+  const submit = e => {
+    e.preventDefault()
+    console.log(formData);
+  }
   return (
     <>
       <div className="container">
@@ -13,11 +22,11 @@ export default function Calculator() {
           <h4>ADVANCE TAX CALCULATOR FOR FINANCIAL YEAR 2023-24</h4>
         </div>
 
-        <div className="calculator-container">
-          <form>
-            <div>
+        <div className="calculator-container" style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px" }}>
+          <form onSubmit={submit}>
+            <div className="inputDivFlex">
               <label style={{ marginRight: "10px" }}>Tax Payer</label>
-              <select name="tax_payer" id="tax_payer">
+              <select name="tax_payer" id="tax_payer" onChange={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.INDIVIDUAL}>Individual</option>
                 <option value={constants.HUF}>HUF</option>
@@ -29,29 +38,34 @@ export default function Calculator() {
                 </option>
               </select>
             </div>
-            <div style={{ marginTop: "10px" }}>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>
                 Whether opting for taxation under Section 115BAC?
               </label>
-              <select name="new_tax" id="new_tax">
+              <select name="new_tax" id="new_tax" onChange={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.TRUE}>Yes</option>
                 <option value={constants.FALSE}>No</option>
               </select>
             </div>
-            <div style={{ marginTop: "10px" }}>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>
                 Male / Female / Senior Citizen
               </label>
-              <select name="gender" id="gender">
+              <select name="gender" id="gender" onChange={(e) => { setData(e.target) }}>
+                <option value={constants.BLANK}>Select</option>
                 <option value={constants.MALE}>Male</option>
                 <option value={constants.FEMALE}>Female</option>
                 <option value={constants.SENIOR_CITIZEN}>Senior Citizen</option>
               </select>
             </div>
-            <div style={{ marginTop: "10px" }}>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Residential Status</label>
-              <select name="gender" id="gender">
+              <select name="residential_status" id="residential_status" onChange={(e) => { setData(e.target) }}>
+                <option value={constants.BLANK}>Select</option>
                 <option value={constants.RESIDENT}>Resident</option>
                 <option value={constants.NON_RESIDENT}>Non Resident</option>
                 <option value={constants.NOT_ORDINARY_RESIDENT}>
@@ -60,14 +74,80 @@ export default function Calculator() {
               </select>
             </div>
 
-            <div style={{ marginTop: "10px" }}>
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>
                 {
                   "Income from Salary (Income from salary after standard deduction of Rs.50000.)"
                 }
               </label>
-              <input type="text" name="income_from_salary" />
+              <input type="text" name="income_from_salary" onChange={(e) => { setData(e.target) }} />
             </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Income From House Property</label>
+              <span className="expandBtn">Show Details</span>
+              <input type="text" name="income_from_house_property" disabled />
+            </div>
+
+            <div style={{ marginTop: "10px" }}>
+              <HouseProperty />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Income From Other Sources</label>
+              <span className="expandBtn">Show Details</span>
+              <input type="text" name="income_from_other_sources" disabled />
+            </div>
+
+            <div style={{ marginTop: "10px" }}>
+              <OhterSources />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Profits and Gains of Business or Profession (enter profit only)</label>
+              <input type="text" name="income_from_business" onChange={(e) => { setData(e.target) }} />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Agricultural Income</label>
+              <input type="text" name="agriculture_income" onChange={(e) => { setData(e.target) }} />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Deductions</label>
+              <input type="text" name="deductions" />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Net Taxable Income</label>
+              <input type="text" name="net_taxable_income" disabled />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Income Tax</label>
+              <input type="text" name="income_tax" disabled />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Surcharge</label>
+              <input type="text" name="surcharge" disabled />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Health and Education Cess</label>
+              <input type="text" name="cess" disabled />
+            </div>
+
+            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+              <label style={{ marginRight: "10px" }}>Total Tax Liability</label>
+              <input type="text" name="total_tax" disabled />
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <input type="submit" value="Calculate" style={{ marginRight: "10px", padding: "10px 15px", background: "#fe6c5f", border: "0", color: "#fff" }} />
+              <button style={{ padding: "10px 15px", background: "#a0a1a1", border: "0", color: "#fff" }}>Reset</button>
+            </div>
+
           </form>
         </div>
       </div>
