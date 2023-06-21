@@ -1,9 +1,6 @@
 let constants = {
   BLANK: "",
   INDIVIDUAL: "Individual",
-  HUF: "HUF",
-  DOMESTIC_COMAPANY: "Domestic Comapny",
-  FOREIGN_COMAPANY: "Foreign Company",
   TRUE: 1,
   FALSE: 0,
   MALE: "Male",
@@ -11,7 +8,13 @@ let constants = {
   SENIOR_CITIZEN: "Senior Citizen",
   RESIDENT: "Resident",
   NON_RESIDENT: "Non Resident",
-  NOT_ORDINARY_RESIDENT: "Not Ordinary Resident"
+  NOT_ORDINARY_RESIDENT: "Not Ordinary Resident",
+  NON_TAXABLE_OLD_TAX:250000,
+  FIRST_TAXABLE_OLD_TAX:500000,
+  SECOND_TAXABLE_OLD_TAX:1000000,
+  NON_TAXABLE_OLD_TAX_60:300000,
+  FIRST_TAXABLE_OLD_TAX_60:500000,
+  SECOND_TAXABLE_OLD_TAX_60:1000000,
 }
 
 export default constants;

@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import constants from "../utils/constants";
 import { HouseProperty } from "./HouseProperty";
 import { OhterSources } from "./OtherSources";
 import { MainContext } from "../context/MainContextProvider";
 
 export default function Calculator() {
-  let { formData, setFormData, setData } = useContext(MainContext);
+  let { formData, setData, taxCalculation, totalTaxableIncome } = useContext(MainContext);
+  let [showHP, setShowHP] = useState(false);
+  let [showOI, setShowOI] = useState(false);
+
   const submit = e => {
-    e.preventDefault()
-    console.log(formData);
+    e.preventDefault();
+    taxCalculation();
   }
   return (
     <>
@@ -29,13 +32,6 @@ export default function Calculator() {
               <select name="tax_payer" id="tax_payer" onChange={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.INDIVIDUAL}>Individual</option>
-                <option value={constants.HUF}>HUF</option>
-                <option value={constants.DOMESTIC_COMAPANY}>
-                  Domestic Compoany
-                </option>
-                <option value={constants.FOREIGN_COMAPANY}>
-                  Foreign Compoany
-                </option>
               </select>
             </div>
 
@@ -85,23 +81,19 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Income From House Property</label>
-              <span className="expandBtn">Show Details</span>
+              <span className="expandBtn" onClick={() => { setShowHP(!showHP) }}>{showHP === true ? "Hide Details" : "Show Details"}</span>
               <input type="text" name="income_from_house_property" disabled />
             </div>
 
-            <div style={{ marginTop: "10px" }}>
-              <HouseProperty />
-            </div>
+            {showHP === true ? (<div style={{ marginTop: "10px" }} ><HouseProperty /></div>) : <></>}
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Income From Other Sources</label>
-              <span className="expandBtn">Show Details</span>
+              <span className="expandBtn" onClick={() => { setShowOI(!showOI) }}>{showOI === true ? "Hide Details" : "Show Details"}</span>
               <input type="text" name="income_from_other_sources" disabled />
             </div>
 
-            <div style={{ marginTop: "10px" }}>
-              <OhterSources />
-            </div>
+            {showOI === true ? (<div style={{ marginTop: "10px" }}><OhterSources /></div>) : <></>}
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Profits and Gains of Business or Profession (enter profit only)</label>
@@ -120,12 +112,12 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Net Taxable Income</label>
-              <input type="text" name="net_taxable_income" disabled />
+              <input type="text" name="net_taxable_income" value={formData.net_taxable_income} disabled />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Income Tax</label>
-              <input type="text" name="income_tax" disabled />
+              <input type="text" name="income_tax" value={formData.income_tax} disabled />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
