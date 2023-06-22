@@ -18,7 +18,7 @@ function oldTaxRegime(amount,age) {
         } else if (amount <= constants.SECOND_TAXABLE_OLD_TAX) {
             tax = (amount - constants.FIRST_TAXABLE_OLD_TAX) * 0.2 + constants.NON_TAXABLE_OLD_TAX * 0.05;
         } else {
-            tax = (amount - SECOND_TAXABLE_OLD_TAX) * 0.3 + constants.FIRST_TAXABLE_OLD_TAX * 0.2 + constants.NON_TAXABLE_OLD_TAX * 0.05;
+            tax = (amount - constants.SECOND_TAXABLE_OLD_TAX) * 0.3 + constants.FIRST_TAXABLE_OLD_TAX * 0.2 + constants.NON_TAXABLE_OLD_TAX * 0.05;
         }
     }else{
         console.log("hello");
