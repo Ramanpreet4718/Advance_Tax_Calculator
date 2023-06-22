@@ -1,6 +1,11 @@
 import constants from "./constants";
 
-let utils ={oldTaxRegime:oldTaxRegime,roundOff:roundOffNearestTen,newTaxRegime:newTaxRegime} ;
+let utils ={
+    oldTaxRegime:oldTaxRegime,
+    roundOff:roundOffNearestTen,
+    newTaxRegime:newTaxRegime,
+    calculateSurcharge:calculateSurcharge
+} ;
 
 
 function oldTaxRegime(amount,age) {
@@ -42,8 +47,6 @@ function newTaxRegime(amount,age) {
     if(amount<=700000){
         return tax;
     }
-
-    if(age!==constants.SENIOR_CITIZEN){
         console.log("newTaxRegime");
         if (amount <= 300000) {
             tax = 0;
@@ -58,8 +61,6 @@ function newTaxRegime(amount,age) {
         }else{
             tax = (amount - 1500000) * 0.3 + 1200000 * 0.2 + 900000 * 0.15 + 600000 * 0.1 + 300000 * 0.05;
         }
-    }
-    console.log(tax);
     return tax
 }
 
@@ -67,6 +68,19 @@ function roundOffNearestTen(number){
     return Math.ceil(number/10)*10
 }
 
-
+function calculateSurcharge(tax){
+    let surcharge;
+    if(tax<=10000000){
+        surcharge = tax*.1
+    }else if(tax<=20000000){
+        surcharge = tax*.15
+    }else if(tax<=50000000){
+        surcharge = tax*.25
+    }else{
+        surcharge = tax*.37
+    }
+    console.log(surcharge);
+    return surcharge
+}
 
 export default utils;

@@ -124,7 +124,7 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Surcharge</label>
-              <input type="text" name="surcharge" disabled />
+              <input type="text" name="surcharge" value={formData.surcharge} disabled />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>

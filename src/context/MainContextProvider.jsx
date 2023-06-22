@@ -33,6 +33,7 @@ export default function MainContextProvider({ children }) {
     function taxCalculation() {
         let netTaxableIncome = totalTaxableIncome()
         let tax;
+        let surcharge = 0;
 
         console.log(formData.new_tax);
 
@@ -42,9 +43,14 @@ export default function MainContextProvider({ children }) {
             tax = utils.oldTaxRegime(netTaxableIncome, formData.gender)
         }
 
-        let cess = utils.roundOff(tax * 4 / 100);
+        if (netTaxableIncome > 5000000) {
+            surcharge = utils.calculateSurcharge(tax);
+        }
+
+        console.log(tax);
+        let cess = utils.roundOff((tax + surcharge) * 4 / 100);
         let totalTax = utils.roundOff(tax + cess);
-        setFormData({ ...formData, income_tax: tax, net_taxable_income: netTaxableIncome, cess: cess, total_tax: totalTax });
+        setFormData({ ...formData, income_tax: tax, net_taxable_income: netTaxableIncome, cess: cess, total_tax: totalTax, surcharge: surcharge });
     }
 
     function totalTaxableIncome() {
