@@ -5,9 +5,11 @@ import { OhterSources } from "./OtherSources";
 import { MainContext } from "../context/MainContextProvider";
 
 export default function Calculator() {
-  let { formData, setData, taxCalculation, totalTaxableIncome } = useContext(MainContext);
+  let { formData, setData, taxCalculation, resetToDefault, showDed, setShowDed } = useContext(MainContext);
   let [showHP, setShowHP] = useState(false);
   let [showOI, setShowOI] = useState(false);
+
+  console.log(showDed);
 
   const submit = e => {
     e.preventDefault();
@@ -39,7 +41,7 @@ export default function Calculator() {
               <label style={{ marginRight: "10px" }}>
                 Whether opting for taxation under Section 115BAC?
               </label>
-              <select name="new_tax" id="new_tax" onChange={(e) => { setData(e.target) }}>
+              <select name="new_tax" id="new_tax" onChange={(e) => { setData(e.target); setShowDed(e.target.value !== "1") }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.TRUE}>Yes</option>
                 <option value={constants.FALSE}>No</option>
@@ -82,7 +84,7 @@ export default function Calculator() {
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Income From House Property</label>
               <span className="expandBtn" onClick={() => { setShowHP(!showHP) }}>{showHP === true ? "Hide Details" : "Show Details"}</span>
-              <input type="text" name="income_from_house_property" disabled />
+              <input type="text" name="income_from_house_property" value={formData.income_from_house_property} disabled />
             </div>
 
             {showHP === true ? (<div style={{ marginTop: "10px" }} ><HouseProperty /></div>) : <></>}
@@ -90,7 +92,7 @@ export default function Calculator() {
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Income From Other Sources</label>
               <span className="expandBtn" onClick={() => { setShowOI(!showOI) }}>{showOI === true ? "Hide Details" : "Show Details"}</span>
-              <input type="text" name="income_from_other_sources" disabled />
+              <input type="text" name="income_from_other_sources" value={formData.income_from_other_sources} disabled />
             </div>
 
             {showOI === true ? (<div style={{ marginTop: "10px" }}><OhterSources /></div>) : <></>}
@@ -105,10 +107,10 @@ export default function Calculator() {
               <input type="text" name="agriculture_income" onChange={(e) => { setData(e.target) }} />
             </div>
 
-            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+            {showDed ? <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Deductions</label>
               <input type="text" name="deductions" />
-            </div>
+            </div> : <></>}
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Net Taxable Income</label>
@@ -127,17 +129,17 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Health and Education Cess</label>
-              <input type="text" name="cess" disabled />
+              <input type="text" name="cess" value={formData.cess} disabled />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Total Tax Liability</label>
-              <input type="text" name="total_tax" disabled />
+              <input type="text" name="total_tax" value={formData.total_tax} disabled />
             </div>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
               <input type="submit" value="Calculate" style={{ marginRight: "10px", padding: "10px 15px", background: "#fe6c5f", border: "0", color: "#fff" }} />
-              <button style={{ padding: "10px 15px", background: "#a0a1a1", border: "0", color: "#fff" }}>Reset</button>
+              <input type="reset" style={{ padding: "10px 15px", background: "#a0a1a1", border: "0", color: "#fff" }} onClick={resetToDefault} />
             </div>
 
           </form>
