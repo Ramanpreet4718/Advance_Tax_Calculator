@@ -44,7 +44,7 @@ export default function MainContextProvider({ children }) {
         }
 
         if (netTaxableIncome > 5000000) {
-            surcharge = utils.calculateSurcharge(tax);
+            surcharge = utils.calculateSurcharge(tax, formData.new_tax);
         }
 
         console.log(tax);

@@ -68,16 +68,26 @@ function roundOffNearestTen(number){
     return Math.ceil(number/10)*10
 }
 
-function calculateSurcharge(tax){
+function calculateSurcharge(tax,new_tax){
     let surcharge;
-    if(tax<=10000000){
-        surcharge = tax*.1
-    }else if(tax<=20000000){
-        surcharge = tax*.15
-    }else if(tax<=50000000){
-        surcharge = tax*.25
+    if(new_tax){
+        if(tax<=10000000){
+            surcharge = tax*.1
+        }else if(tax<=20000000){
+            surcharge = tax*.15
+        }else{
+            surcharge = tax*.25
+        }
     }else{
-        surcharge = tax*.37
+        if(tax<=10000000){
+            surcharge = tax*.1
+        }else if(tax<=20000000){
+            surcharge = tax*.15
+        }else if(tax<=50000000){
+            surcharge = tax*.25
+        }else{
+            surcharge = tax*.37
+        }
     }
     console.log(surcharge);
     return surcharge
