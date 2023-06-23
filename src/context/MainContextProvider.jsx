@@ -35,8 +35,6 @@ export default function MainContextProvider({ children }) {
         let tax;
         let surcharge = 0;
 
-        console.log(netTaxableIncome);
-
         if (formData.new_tax) {
             tax = utils.newTaxRegime(netTaxableIncome, formData.gender)
         } else {
@@ -47,14 +45,12 @@ export default function MainContextProvider({ children }) {
             surcharge = utils.calculateSurcharge(tax, formData.new_tax);
         }
 
-        console.log(tax);
         let cess = utils.roundOff((tax + surcharge) * 4 / 100);
         let totalTax = utils.roundOff(tax + cess);
         setFormData({ ...formData, income_tax: tax, net_taxable_income: netTaxableIncome, cess: cess, total_tax: totalTax, surcharge: surcharge });
     }
 
     function totalTaxableIncome() {
-        console.log(formData);
         if (formData.deductions > 150000) {
             formData.deductions = 150000;
         }
@@ -70,7 +66,6 @@ export default function MainContextProvider({ children }) {
         let letOutProperty = netAnnualValue - (standardDeduction + (formData.interest_on_loan_rent || 0)) || 0;
         let incomeFromHouseProperty = selfOccupiedProperty + letOutProperty || 0;
 
-        console.log(incomeFromHouseProperty);
         setFormData({ ...formData, self_occupied_property: selfOccupiedProperty, net_annual_value: netAnnualValue, "standard_deduction_@30": standardDeduction, let_out_property: letOutProperty, income_from_house_property: incomeFromHouseProperty })
     }
 

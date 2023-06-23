@@ -4,7 +4,8 @@ let utils ={
     oldTaxRegime:oldTaxRegime,
     roundOff:roundOffNearestTen,
     newTaxRegime:newTaxRegime,
-    calculateSurcharge:calculateSurcharge
+    calculateSurcharge:calculateSurcharge,
+    checkifEmptyField:checkifEmptyField
 } ;
 
 
@@ -26,7 +27,6 @@ function oldTaxRegime(amount,age) {
             tax = (amount - constants.SECOND_TAXABLE_OLD_TAX) * 0.3 + constants.FIRST_TAXABLE_OLD_TAX * 0.2 + constants.NON_TAXABLE_OLD_TAX * 0.05;
         }
     }else{
-        console.log("hello");
         if (amount <= constants.NON_TAXABLE_OLD_TAX_60) {
             tax = 0;
         } else if (amount <= constants.FIRST_TAXABLE_OLD_TAX_60) {
@@ -47,7 +47,6 @@ function newTaxRegime(amount,age) {
     if(amount<=700000){
         return tax;
     }
-        console.log("newTaxRegime");
         if (amount <= 300000) {
             tax = 0;
         } else if (amount <= 600000) {
@@ -89,8 +88,19 @@ function calculateSurcharge(tax,new_tax){
             surcharge = tax*.37
         }
     }
-    console.log(surcharge);
     return surcharge
 }
 
+function checkifEmptyField(dataObj){
+    let taxPayer = dataObj.querySelector("#tax_payer").value;
+    let newTax = dataObj.querySelector("#new_tax").value;
+    let gender = dataObj.querySelector("#gender").value;
+    let residentialStatus = dataObj.querySelector("#residential_status").value;
+
+     return(checkifEmpty(taxPayer)||checkifEmpty(newTax)||checkifEmpty(gender)||checkifEmpty(residentialStatus))
+}
+
+function checkifEmpty(value){
+    return(value==="" || value===undefined)
+}
 export default utils;

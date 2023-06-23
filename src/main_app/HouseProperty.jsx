@@ -4,8 +4,6 @@ import { MainContext } from "../context/MainContextProvider"
 export function HouseProperty() {
     let { formData, setData, calculateHPIncome, showDed, setShowDed } = useContext(MainContext);
 
-    console.log(formData.new_tax);
-
     return <div className="housePropertyOptions">
         {showDed ? <>
             <div style={{ marginTop: "10px" }}><label> a. Income from Self-occupied Property</label></div>

@@ -3,13 +3,13 @@ import constants from "../utils/constants";
 import { HouseProperty } from "./HouseProperty";
 import { OhterSources } from "./OtherSources";
 import { MainContext } from "../context/MainContextProvider";
+import utils from "../utils/utils";
 
 export default function Calculator() {
   let { formData, setData, taxCalculation, resetToDefault, showDed, setShowDed } = useContext(MainContext);
   let [showHP, setShowHP] = useState(false);
   let [showOI, setShowOI] = useState(false);
-
-  console.log(showDed);
+  let [disableBTN, setDisableBTN] = useState(true);
 
   const submit = e => {
     e.preventDefault();
@@ -29,47 +29,49 @@ export default function Calculator() {
 
         <div className="calculator-container" style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px" }}>
           <form onSubmit={submit}>
-            <div className="inputDivFlex">
-              <label style={{ marginRight: "10px" }}>Tax Payer</label>
-              <select name="tax_payer" id="tax_payer" onInput={(e) => { setData(e.target) }}>
-                <option value={constants.BLANK}>Select</option>
-                <option value={constants.INDIVIDUAL}>Individual</option>
-              </select>
-            </div>
+            <div id="selectorParent">
+              <div className="inputDivFlex">
+                <label style={{ marginRight: "10px" }}>Tax Payer</label>
+                <select name="tax_payer" id="tax_payer" onInput={(e) => { setData(e.target); setDisableBTN(utils.checkifEmptyField(e.target.parentNode.parentNode)) }}>
+                  <option value={constants.BLANK}>Select</option>
+                  <option value={constants.INDIVIDUAL}>Individual</option>
+                </select>
+              </div>
 
-            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
-              <label style={{ marginRight: "10px" }}>
-                Whether opting for taxation under Section 115BAC?
-              </label>
-              <select name="new_tax" id="new_tax" onInput={(e) => { setData(e.target); setShowDed(e.target.value !== "1") }}>
-                <option value={constants.BLANK}>Select</option>
-                <option value={constants.TRUE}>Yes</option>
-                <option value={constants.FALSE}>No</option>
-              </select>
-            </div>
+              <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+                <label style={{ marginRight: "10px" }}>
+                  Whether opting for taxation under Section 115BAC?
+                </label>
+                <select name="new_tax" id="new_tax" onInput={(e) => { setData(e.target); setShowDed(e.target.value !== "1"); setDisableBTN(utils.checkifEmptyField(e.target.parentNode.parentNode)) }}>
+                  <option value={constants.BLANK}>Select</option>
+                  <option value={constants.TRUE}>Yes</option>
+                  <option value={constants.FALSE}>No</option>
+                </select>
+              </div>
 
-            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
-              <label style={{ marginRight: "10px" }}>
-                Male / Female / Senior Citizen
-              </label>
-              <select name="gender" id="gender" onInput={(e) => { setData(e.target) }}>
-                <option value={constants.BLANK}>Select</option>
-                <option value={constants.MALE}>Male</option>
-                <option value={constants.FEMALE}>Female</option>
-                <option value={constants.SENIOR_CITIZEN}>Senior Citizen</option>
-              </select>
-            </div>
+              <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+                <label style={{ marginRight: "10px" }}>
+                  Male / Female / Senior Citizen
+                </label>
+                <select name="gender" id="gender" onInput={(e) => { setData(e.target); setDisableBTN(utils.checkifEmptyField(e.target.parentNode.parentNode)) }}>
+                  <option value={constants.BLANK}>Select</option>
+                  <option value={constants.MALE}>Male</option>
+                  <option value={constants.FEMALE}>Female</option>
+                  <option value={constants.SENIOR_CITIZEN}>Senior Citizen</option>
+                </select>
+              </div>
 
-            <div className="inputDivFlex" style={{ marginTop: "10px" }}>
-              <label style={{ marginRight: "10px" }}>Residential Status</label>
-              <select name="residential_status" id="residential_status" onInput={(e) => { setData(e.target) }}>
-                <option value={constants.BLANK}>Select</option>
-                <option value={constants.RESIDENT}>Resident</option>
-                <option value={constants.NON_RESIDENT}>Non Resident</option>
-                <option value={constants.NOT_ORDINARY_RESIDENT}>
-                  Not Ordinary Resident
-                </option>
-              </select>
+              <div className="inputDivFlex" style={{ marginTop: "10px" }}>
+                <label style={{ marginRight: "10px" }}>Residential Status</label>
+                <select name="residential_status" id="residential_status" onInput={(e) => { setData(e.target); setDisableBTN(utils.checkifEmptyField(e.target.parentNode.parentNode)) }}>
+                  <option value={constants.BLANK}>Select</option>
+                  <option value={constants.RESIDENT}>Resident</option>
+                  <option value={constants.NON_RESIDENT}>Non Resident</option>
+                  <option value={constants.NOT_ORDINARY_RESIDENT}>
+                    Not Ordinary Resident
+                  </option>
+                </select>
+              </div>
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
@@ -138,8 +140,8 @@ export default function Calculator() {
             </div>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <input type="submit" value="Calculate" style={{ marginRight: "10px", padding: "10px 15px", background: "#fe6c5f", border: "0", color: "#fff" }} />
-              <input type="reset" style={{ padding: "10px 15px", background: "#a0a1a1", border: "0", color: "#fff" }} onClick={resetToDefault} />
+              <input type="submit" className="submit" value="Calculate" disabled={disableBTN} />
+              <input type="reset" style={{ padding: "10px 15px", background: "#339966", border: "0", color: "#fff", cursor: "pointer" }} onClick={resetToDefault} />
             </div>
 
           </form>
