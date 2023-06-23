@@ -19,8 +19,8 @@ Overall, this project was a fun and enriching experience, allowing me to deepen 
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot_1.png)
-![Screenshot 2](screenshots/screenshot_2.png)
+![Screenshot 1](https://raw.githubusercontent.com/Ramanpreet4718/Advance_Tax_Calculator/main/screenshots/Screenshot%202023-06-23%20115832.png)
+![Screenshot 2](https://raw.githubusercontent.com/Ramanpreet4718/Advance_Tax_Calculator/main/screenshots/screencapture-silver-druid-74709d-netlify-app-2023-06-23-12_00_13.png)
 
 ## Installation
 
