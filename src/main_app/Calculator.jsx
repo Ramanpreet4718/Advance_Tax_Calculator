@@ -20,7 +20,7 @@ export default function Calculator() {
       <div className="container">
         <div className="banner">
           <img
-            src="../src/assets/calculator.png"
+            src="https://incometaxindia.gov.in/_Layouts/15/Images/dit/TaxTool/calIcon.png"
             alt="calculator"
             style={{ width: "24px" }}
           />
