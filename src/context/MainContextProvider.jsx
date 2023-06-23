@@ -35,7 +35,7 @@ export default function MainContextProvider({ children }) {
         let tax;
         let surcharge = 0;
 
-        console.log(formData.new_tax);
+        console.log(netTaxableIncome);
 
         if (formData.new_tax) {
             tax = utils.newTaxRegime(netTaxableIncome, formData.gender)
@@ -75,9 +75,6 @@ export default function MainContextProvider({ children }) {
     }
 
     function calculateOtherIncome() {
-        // savings_interest
-        // commission
-        // lottery
 
         let incomeFromOtherSources = (formData.savings_interest || 0) + (formData.commission || 0) + (formData.lottery || 0)
         setFormData({ ...formData, income_from_other_sources: incomeFromOtherSources });
@@ -85,7 +82,6 @@ export default function MainContextProvider({ children }) {
 
     function resetToDefault() {
         setFormData({
-            ...formData,
             income_tax: 0,
             net_taxable_income: 0,
             income_from_house_property: 0,
