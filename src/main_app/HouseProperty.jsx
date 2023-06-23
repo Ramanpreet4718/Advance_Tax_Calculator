@@ -13,7 +13,7 @@ export function HouseProperty() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
                 <label style={{ marginRight: "10px" }}>1. Interest on Housing Loan</label>
-                <input type="text" name="interest_on_loan" onChange={(e) => { setData(e.target); }} onBlur={calculateHPIncome} />
+                <input type="text" name="interest_on_loan" onInput={(e) => { setData(e.target); }} onBlur={calculateHPIncome} />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
@@ -26,17 +26,17 @@ export function HouseProperty() {
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>
             <label style={{ marginRight: "10px" }}>1. Annual Letable Value/Rent Received or Receivable</label>
-            <input type="text" name="annual_lelable_value" onChange={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
+            <input type="text" name="annual_lelable_value" onInput={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
         </div>
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>
             <label style={{ marginRight: "10px" }}>2. Less: Municipal Taxes Paid During the Year</label>
-            <input type="text" name="municipal_taxes" onChange={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
+            <input type="text" name="municipal_taxes" onInput={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
         </div>
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>
             <label style={{ marginRight: "10px" }}>3. Less:Unrealized Rent</label>
-            <input type="text" name="unrealized_rent" onChange={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
+            <input type="text" name="unrealized_rent" onInput={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
         </div>
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>
@@ -53,7 +53,7 @@ export function HouseProperty() {
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>
             <label style={{ marginRight: "10px" }}>ii. Interest on Housing Loan</label>
-            <input type="text" name="interest_on_loan_rent" onChange={(e) => { setData(e.target) }} onBlur={calculateHPIncome} />
+            <input type="text" name="interest_on_loan_rent" onInput={(e) => { setData(e.target) }} onBlur={calculateHPIncome} disabled={showDed === false} />
         </div>
 
         <div className="inputDivFlex" style={{ marginTop: "10px" }}>

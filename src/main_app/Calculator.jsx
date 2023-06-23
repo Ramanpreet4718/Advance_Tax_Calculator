@@ -31,7 +31,7 @@ export default function Calculator() {
           <form onSubmit={submit}>
             <div className="inputDivFlex">
               <label style={{ marginRight: "10px" }}>Tax Payer</label>
-              <select name="tax_payer" id="tax_payer" onChange={(e) => { setData(e.target) }}>
+              <select name="tax_payer" id="tax_payer" onInput={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.INDIVIDUAL}>Individual</option>
               </select>
@@ -41,7 +41,7 @@ export default function Calculator() {
               <label style={{ marginRight: "10px" }}>
                 Whether opting for taxation under Section 115BAC?
               </label>
-              <select name="new_tax" id="new_tax" onChange={(e) => { setData(e.target); setShowDed(e.target.value !== "1") }}>
+              <select name="new_tax" id="new_tax" onInput={(e) => { setData(e.target); setShowDed(e.target.value !== "1") }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.TRUE}>Yes</option>
                 <option value={constants.FALSE}>No</option>
@@ -52,7 +52,7 @@ export default function Calculator() {
               <label style={{ marginRight: "10px" }}>
                 Male / Female / Senior Citizen
               </label>
-              <select name="gender" id="gender" onChange={(e) => { setData(e.target) }}>
+              <select name="gender" id="gender" onInput={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.MALE}>Male</option>
                 <option value={constants.FEMALE}>Female</option>
@@ -62,7 +62,7 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Residential Status</label>
-              <select name="residential_status" id="residential_status" onChange={(e) => { setData(e.target) }}>
+              <select name="residential_status" id="residential_status" onInput={(e) => { setData(e.target) }}>
                 <option value={constants.BLANK}>Select</option>
                 <option value={constants.RESIDENT}>Resident</option>
                 <option value={constants.NON_RESIDENT}>Non Resident</option>
@@ -78,7 +78,7 @@ export default function Calculator() {
                   "Income from Salary (Income from salary after standard deduction of Rs.50000.)"
                 }
               </label>
-              <input type="text" name="income_from_salary" onChange={(e) => { setData(e.target) }} />
+              <input type="text" name="income_from_salary" onInput={(e) => { setData(e.target) }} />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
@@ -99,12 +99,12 @@ export default function Calculator() {
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Profits and Gains of Business or Profession (enter profit only)</label>
-              <input type="text" name="income_from_business" onChange={(e) => { setData(e.target) }} />
+              <input type="text" name="income_from_business" onInput={(e) => { setData(e.target) }} />
             </div>
 
             <div className="inputDivFlex" style={{ marginTop: "10px" }}>
               <label style={{ marginRight: "10px" }}>Agricultural Income</label>
-              <input type="text" name="agriculture_income" onChange={(e) => { setData(e.target) }} />
+              <input type="text" name="agriculture_income" onInput={(e) => { setData(e.target) }} />
             </div>
 
             {showDed ? <div className="inputDivFlex" style={{ marginTop: "10px" }}>

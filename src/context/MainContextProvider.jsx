@@ -95,7 +95,8 @@ export default function MainContextProvider({ children }) {
             net_annual_value: 0,
             cess: 0,
             "standard_deduction_@30": 0,
-            new_tax: 0
+            new_tax: 0,
+            total_tax: 0
         })
     }
 
